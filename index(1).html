@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Numbrella — Der solarbetriebene Smart-Sonnenschirm für Strände und Resorts.">
+<title>Numbrella — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:   #0B2545;
+    --ocean:  #1B4F72;
+    --teal:   #1A7A72;
+    --solar:  #F4A823;
+    --muted:  #7A8F9E;
+    --white:  #FFFFFF;
+    --dark:   #070F1A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ── */
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, #1A7A7222 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, #F4A82308 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, #1B4F7215 0%, transparent 60%),
+      linear-gradient(160deg, #070F1A 0%, #0B2545 50%, #070F1A 100%);
+  }
+
+  /* Animated grid */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(26,122,114,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,122,114,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift {
+    0%   { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+    animation: orbFloat 12s ease-in-out infinite;
+    z-index: 0;
+  }
+  .orb-1 { width: 500px; height: 500px; background: var(--teal);  top: -150px; left: -100px; animation-delay: 0s; }
+  .orb-2 { width: 400px; height: 400px; background: var(--solar); bottom: -100px; right: -80px; animation-delay: -6s; }
+  .orb-3 { width: 300px; height: 300px; background: var(--ocean); top: 40%; left: 60%; animation-delay: -3s; }
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(30px, -20px) scale(1.05); }
+    66%       { transform: translate(-20px, 30px) scale(0.95); }
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  /* ── LOGO MARK ── */
+  .logo-wrap {
+    margin-bottom: 48px;
+    animation: fadeUp 1s ease both;
+  }
+
+  .logo-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), #0D4F4A);
+    border: 2px solid var(--solar);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 60px rgba(26,122,114,0.3), 0 0 120px rgba(26,122,114,0.1);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(26,122,114,0.3), 0 0 80px rgba(26,122,114,0.1); }
+    50%       { box-shadow: 0 0 80px rgba(26,122,114,0.5), 0 0 160px rgba(26,122,114,0.2); }
+  }
+
+  .logo-icon svg {
+    width: 52px;
+    height: 52px;
+  }
+
+  .logo-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 8vw, 56px);
+    letter-spacing: 8px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  /* ── HERO TEXT ── */
+  .hero {
+    max-width: 700px;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .coming-soon {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--solar);
+    border: 1px solid rgba(244,168,35,0.3);
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    background: rgba(244,168,35,0.05);
+  }
+
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 88px);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .headline .line-teal { color: var(--teal); }
+  .headline .line-solar { color: var(--solar); }
+
+  .description {
+    font-size: clamp(15px, 2.5vw, 17px);
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 540px;
+    margin: 0 auto 48px;
+  }
+
+  .description strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ── FEATURES ROW ── */
+  .features {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+
+  .feature-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid rgba(26,122,114,0.3);
+    border-radius: 24px;
+    background: rgba(26,122,114,0.06);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  .feature-pill:hover {
+    border-color: var(--teal);
+    color: var(--white);
+    background: rgba(26,122,114,0.12);
+  }
+  .feature-pill .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .cta-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: linear-gradient(135deg, var(--teal), #0D5E57);
+    border: 1px solid rgba(26,122,114,0.5);
+    border-radius: 4px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(26,122,114,0.25);
+  }
+  .email-link:hover {
+    background: linear-gradient(135deg, #20907F, var(--teal));
+    box-shadow: 0 12px 48px rgba(26,122,114,0.4);
+    transform: translateY(-2px);
+  }
+  .email-link svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    margin: 56px auto;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  /* ── BOTTOM TAG ── */
+  .bottom {
+    animation: fadeUp 1s ease 0.8s both;
+  }
+
+  .tagline {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(122,143,158,0.5);
+    text-transform: uppercase;
+  }
+
+  .tagline span {
+    color: var(--solar);
+    opacity: 0.7;
+  }
+
+  /* ── SOLAR ANIMATION TOP ── */
+  .solar-badge {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 10;
+    animation: fadeIn 2s ease 1s both;
+  }
+
+  .solar-ring {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(244,168,35,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .solar-ring::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(244,168,35,0.15);
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .solar-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFD45E, var(--solar));
+    box-shadow: 0 0 20px rgba(244,168,35,0.4);
+    animation: solarPulse 3s ease-in-out infinite;
+  }
+  @keyframes solarPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(244,168,35,0.4); }
+    50%       { transform: scale(1.1); box-shadow: 0 0 40px rgba(244,168,35,0.6); }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .solar-badge { display: none; }
+    .features { gap: 8px; }
+    .feature-pill { font-size: 11px; padding: 6px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Solar badge top right -->
+<div class="solar-badge">
+  <div class="solar-ring">
+    <div class="solar-dot"></div>
+  </div>
+</div>
+
+<main class="page">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <div class="logo-icon">
+      <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sun rays -->
+        <line x1="26" y1="4" x2="26" y2="10" stroke="#F4A823" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="26" y1="42" x2="26" y2="48" stroke="#F4A823" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="4" y1="26" x2="10" y2="26" stroke="#F4A823" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="42" y1="26" x2="48" y2="26" stroke="#F4A823" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="10.5" y1="10.5" x2="14.7" y2="14.7" stroke="#F4A823" stroke-width="2" stroke-linecap="round"/>
+        <line x1="37.3" y1="37.3" x2="41.5" y2="41.5" stroke="#F4A823" stroke-width="2" stroke-linecap="round"/>
+        <line x1="41.5" y1="10.5" x2="37.3" y2="14.7" stroke="#F4A823" stroke-width="2" stroke-linecap="round"/>
+        <line x1="14.7" y1="37.3" x2="10.5" y2="41.5" stroke="#F4A823" stroke-width="2" stroke-linecap="round"/>
+        <!-- Sun circle -->
+        <circle cx="26" cy="26" r="9" fill="#F4A823" opacity="0.9"/>
+        <circle cx="26" cy="26" r="5" fill="#FFD45E"/>
+      </svg>
+    </div>
+    <div class="logo-name">NUMBRELLA</div>
+    <div class="logo-sub">Smart Beach Ecosystem</div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="coming-soon">✦ Coming Soon</div>
+
+    <h1 class="headline">
+      <span class="line-teal">The Tesla</span><br>
+      of<br>
+      <span class="line-solar">Sunshades</span>
+    </h1>
+
+    <p class="description">
+      Numbrella ist der <strong>solarbetriebene Smart-Sonnenschirm</strong> für Premium-Strände und Resorts — mit integriertem Kühlschrank, App-Steuerung und kontaktlosem Payment. <strong>Hardware trifft SaaS.</strong>
+    </p>
+  </div>
+
+  <!-- Feature pills -->
+  <div class="features">
+    <div class="feature-pill"><span class="dot"></span>Solar-Energie</div>
+    <div class="feature-pill"><span class="dot"></span>Kompressor-Kühlschrank</div>
+    <div class="feature-pill"><span class="dot"></span>Apple & Google Pay</div>
+    <div class="feature-pill"><span class="dot"></span>Smart-Wertfach</div>
+    <div class="feature-pill"><span class="dot"></span>App via QR / NFC</div>
+    <div class="feature-pill"><span class="dot"></span>LED-Statusring</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <p class="cta-label">Interesse? Schreib uns</p>
+    <a href="mailto:info@numbrella.at" class="email-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <polyline points="2,4 12,13 22,4"/>
+      </svg>
+      info@numbrella.at
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Bottom -->
+  <div class="bottom">
+    <p class="tagline">Salzburg, Austria &nbsp;·&nbsp; <span>©2025 Numbrella</span></p>
+  </div>
+
+</main>
+
+</body>
+</html>
